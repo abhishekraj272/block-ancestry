@@ -26,7 +26,7 @@ const getBlockHash = async (height) => {
 
 const getBlockTrasactions = async (hash, page) => {
     const url = format(`${BLOCKSTREAM_BASE_URL}${ENDPOINTS.TXNS}`, hash, page);
-
+    let txns;
     try {
         const response = await fetch(url);
         txns = response.data;
@@ -34,6 +34,7 @@ const getBlockTrasactions = async (hash, page) => {
     }
     catch (error) {
         console.log(error);
+        return null
     }
 
     return txns;
@@ -52,6 +53,7 @@ const getBlock = async () => {
     let count = 0;
     while (true) {
         const transactions = await getBlockTrasactions(hash, count++ * 25);
+        console.log(`Fetched ${transactions.length} transactions, Page: ${count}`);
         if (!transactions) break;
     }
 

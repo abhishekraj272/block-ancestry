@@ -11,12 +11,12 @@ const getTxIdAndInputTxidMap = (txns) => {
     return txIdMap;
 }
 
-const findAncestors = (txIdMap, txnId, result = []) => {
+const findAncestors = (txIdMap, txnId, result = [], shouldCount) => {
     const txnIds = txIdMap[txnId];
     if (!txnIds) return result;
-    result.push(txnId);
+    if (shouldCount) result.push(txnId);
     for (const id of txnIds) {
-        findAncestors(txIdMap, id, result);
+        findAncestors(txIdMap, id, result, true);
     }
     return result;
 }
@@ -27,7 +27,7 @@ const findAncestors = (txIdMap, txnId, result = []) => {
     const ancestorChain = [];
 
     for (key in txIdMap) {
-        const result = findAncestors(txIdMap, key);
+        const result = findAncestors(txIdMap, key, [], false);
         ancestorChain.push([key, result ]);
     }
 

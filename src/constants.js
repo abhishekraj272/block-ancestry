@@ -1,6 +1,6 @@
 const BLOCKSTREAM_BASE_URL = "https://blockstream.info/api";
 
-const BLOCK_HEIGHT = 680000;
+const BLOCK_HEIGHT = 680001;
 
 const ENDPOINTS = {
     BLOCK_HEIGHT: "/block-height/",
