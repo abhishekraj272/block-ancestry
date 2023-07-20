@@ -36,5 +36,6 @@ const findAncestors = (txIdMap, txnId, result = [], shouldCount) => {
     const result = ancestorChainToConsider.map(([txnId, ancestors]) => {
         return {[txnId]: ancestors.length}
     });
+    console.log("## Result Calculated, Pls Check 'src/results.json' file ##")
     saveResultsInCache(result);
 })()

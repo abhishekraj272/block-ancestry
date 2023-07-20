@@ -3,7 +3,9 @@
 ## Getting Started
 
 1. `npm install`
-2. `node src/index.js`
+2. `npm start`
+
+> Note: Delete `block.json` and `transactions.json` to pull new data.
 
 ## Working?
 1. It pulls hash from the block with given height and caches in `block.json`.

@@ -33,7 +33,6 @@ const getBlockTrasactions = async (hash, page) => {
         saveBlockTransactionsInCache(txns);
     }
     catch (error) {
-        console.log(error);
         return null
     }
 
@@ -52,9 +51,13 @@ const getBlock = async () => {
 
     let count = 0;
     while (true) {
-        const transactions = await getBlockTrasactions(hash, count++ * 25);
-        console.log(`Fetched ${transactions.length} transactions, Page: ${count}`);
-        if (!transactions) break;
+        try {
+            const transactions = await getBlockTrasactions(hash, count++ * 25);
+            console.log(`Fetched ${transactions.length} transactions, Page: ${count}`);
+            if (!transactions) break;
+        } catch {
+            break;
+        }
     }
 
     txns = getBlockTransactionsFromCache();
